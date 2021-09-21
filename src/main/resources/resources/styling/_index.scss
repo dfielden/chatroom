@@ -1,0 +1,98 @@
+$color-off-white: #f1ebeb;
+$color-grey: #a4a4a4;
+$color-grey-dark: #7c7c7c;
+$gradient: linear-gradient(145deg, rgba($color-grey,1) 0%, rgba($color-grey-dark,1) 100%);
+
+// FONT VARIABLES
+$font-primary: 'Neuton', serif;
+$font-display: 'Nanum Gothic', sans-serif;
+
+
+// BREAK POINTS
+$break-tiny: 280px;
+$break-smallest: 400px;
+$break-small: 600px;
+$break-medium: 900px;
+$break-large: 1260px;
+$break-largest: 1500px;
+
+/*Universal declaration - will apply these settings to all elements, also select all before and after pseudoelements - prevents strange behaviour*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: inherit; /*forcing inheritance on each element from body - this is considered good practice*/
+}
+
+html {
+  font-size: 62.5%; /*1rem = 10px*/
+  height: 100%;
+  font-family: $font-primary;
+  //color: $color-primary-dark;
+}
+
+body {
+  box-sizing: border-box; /*changes box model so that borders and paddings are not added to total width/height specified for a box*/
+  //padding: 2rem; /* padding around body - not inherited to other elements*/
+  height: 100%;
+  width: 100%;
+  background: $gradient;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 2rem;
+}
+
+.content {
+  width: 50rem;
+  height: 80%;
+  max-width: 100rem;
+  background-color: $color-off-white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.messages {
+  overflow-y: scroll;
+  margin-bottom: 2rem;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid black;
+  margin: 1rem;
+}
+
+.message-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+
+
+.message-user {
+  font-weight: bold;
+}
+
+.message-time {
+
+}
+
+.message-body {
+  white-space: pre-wrap;
+
+}
