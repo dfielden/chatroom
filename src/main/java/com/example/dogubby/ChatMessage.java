@@ -37,13 +37,20 @@ public class ChatMessage {
 
 class MessageBody {
     private final String message;
+    private final String cookie;
 
-    public MessageBody(String message) {
+    public MessageBody(String message, String cookie) {
         this.message = message;
+        this.cookie = cookie;
     }
 
     public String getMessage() {
         return this.message;
+    }
+
+    public String getCookie() {
+        // Remove the "DOGUBBYCOOKIE=" component
+        return this.cookie.substring(14);
     }
 
 

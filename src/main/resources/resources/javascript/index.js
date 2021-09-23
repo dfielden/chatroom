@@ -2,8 +2,13 @@ import {ChatMessage} from "./ChatMessage.js";
 import {AJAX} from "./ajax.js";
 
 const messages = document.querySelector('.messages');
-const sendMessageBtn = document.querySelector('.btn');
+const sendMessageBtn = document.querySelector('#send-msg-btn');
+const leaveChatBtn = document.querySelector('#leave-chat-btn');
+const scrollBottomBtn = document.querySelector('#scroll-bottom-btn');
 const textArea = document.querySelector('.text-area');
+
+const LOGOUT_SUCCESS_VALUE = 'LOGOUT_SUCCESS';
+
 
 window.addEventListener('load', async(e) => {
     //messages.innerHTML = '';
@@ -31,21 +36,27 @@ client.connect({}, frame => {
 function sendMessage() {
     const messageContent = document.querySelector('.text-area').value.trim();
     if (messageContent) {
-        client.send('/app/chat', {}, JSON.stringify({message: messageContent}));
-        document.querySelector('.text-area').value = "";
+        client.send('/app/chat', {}, JSON.stringify({message: messageContent, cookie: document.cookie}));
+        textArea.value = "";
+        textArea.setSelectionRange(0,0);
     }
 }
+
+textArea.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13 && !e.shiftKey) {
+        sendMessage();
+        textArea.setSelectionRange(0,0);
+    }
+})
 
 sendMessageBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     sendMessage();
-})
+});
 
-
-
-
-
-
+scrollBottomBtn.addEventListener('click', async (e) => {
+    messages.scrollTop = messages.scrollHeight;
+});
 
 const createMessageHtml = (chatMessage) => {
     const date = createDateText(new Date(chatMessage.timeSentMillis));
@@ -63,9 +74,14 @@ const createMessageHtml = (chatMessage) => {
 const displayMessage = (chatMessage) => {
     const html = createMessageHtml(chatMessage);
     messages.insertAdjacentHTML('beforeend', html);
-    //TODO: this event needs to be triggered by server
-    messages.scrollTop = messages.scrollHeight;
 }
+
+leaveChatBtn.addEventListener('click', async function() {
+    const data = await AJAX("/logout");
+    if (data === LOGOUT_SUCCESS_VALUE) {
+        window.location.href = "/login";
+    }
+})
 
 const createDateText = (date) => {
     const time = `${date.getHours() < 10 ?'0':''}${date.getHours()}:${date.getMinutes() < 10 ?'0':''}${date.getMinutes()}`;

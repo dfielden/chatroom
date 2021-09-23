@@ -3,6 +3,11 @@
   flex-direction: column;
   padding: 2rem 1rem 1rem 1rem;
   border-top: 1px solid $color-grey;
+
+  &--login {
+    border-top: none;
+
+  }
 }
 
 .input-container {
@@ -23,14 +28,9 @@
   border: 1px solid black;
   border-radius: 1rem;
 
-
-
   &--select {
     border-bottom: none;
   }
-
-
-
 
   &:focus {
     outline: none;
@@ -39,6 +39,13 @@
     background-color: $color-off-white;
   }
 
+}
 
+.form-label {
+  width: 80%;
+  font-family: $font-display;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.6rem;
 
 }

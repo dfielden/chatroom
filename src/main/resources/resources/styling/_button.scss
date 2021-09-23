@@ -31,4 +31,31 @@
       background-color: $color-grey-dark;
     }
   }
+
+  &--white {
+    background-color: $color-off-white;
+    color: $color-grey-dark;
+
+    &:hover {
+      background-color: $color-grey;
+    }
+  }
+}
+
+
+
+
+.btn-circle {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50rem;
+  border: 1px solid black;
+  font-weight: bold;
+  font-size: 2rem;
+  transform: translate(0, 50%);
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-grey;
+  }
 }
