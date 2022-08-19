@@ -1,4 +1,4 @@
-# dogubby
+# chatroom
 Aim of project: create a simple chat room MVP within a week.
 Technology: Java, Spring Boot, HTML, CSS, JavaScript
 Before entering the chat room, users hare redirected to an entry screen where they must create a username. Doing this starts a session and users can now enter the chat.
